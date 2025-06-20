@@ -3,57 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MCQ Test</title>
+    <title>MCQ Test Paper</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f4f4f4;
+            margin: 40px;
+            line-height: 1.6;
         }
         .quiz-container {
-            max-width: 600px;
+            max-width: 800px;
             margin: auto;
-            background: white;
             padding: 20px;
+            border: 1px solid #ccc;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            text-align: center;
-            color: #333;
         }
         .question {
             margin-bottom: 20px;
         }
-        .question p {
-            font-weight: bold;
+        .question h3 {
             margin-bottom: 10px;
+            color: #333;
         }
         .options label {
             display: block;
             margin: 5px 0;
-            cursor: pointer;
         }
-        button {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            background-color: #28a745;
+        .submit-btn {
+            background-color: #4CAF50;
             color: white;
+            padding: 10px 20px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 16px;
         }
-        button:hover {
-            background-color: #218838;
+        .submit-btn:hover {
+            background-color: #45a049;
         }
         #result {
             margin-top: 20px;
-            text-align: center;
-            font-size: 18px;
             font-weight: bold;
         }
     </style>
 </head>
+<body>
+    <div class="quiz-container">
+        <h1>MCQ Test Paper</h1>
+        <form id="quiz-form">
+            <div class="question">
+                <h3>1. What is the capital of France?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q1" value="a"> a) Paris</label>
+                    <label><input type="radio" name="q1" value="b"> b) London</label>
+                    <label><input type="radio" name="q1" value="c"> c) Berlin</label>
+                    <label><input type="radio" name="q1" value="d"> d) Madrid</label>
+                </div>
+            </div>
+            <div class="question">
+                <h3>2. Which planet is known as the Red Planet?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q2" value="a"> a) Jupiter</label>
+                    <label><input type="radio" name="q2" value="b"> b) Mars</label>
+                    <label><input type="radio" name="q2" value="c"> c) Venus</label>
+                    <label><input type="radio" name="q2" value="d"> d) Mercury</label>
+                </div>
+            </div>
+            <div class="question">
+                <h3>3. What is 2 + 2?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q3" value="a"> a) 3</label>
+                    <label><input type="radio" name="q3" value="b"> b) 4</label>
+                    <label><input type="radio" name="q3" value="c"> c) 5</label>
+                    <label><input type="radio" name="q3" value="d"> d) 6</label>
+                </div>
+            </div>
+            <button type="submit" class="submit-btn">Submit Answers</button>
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        document.getElementById('quiz-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            let score = 0;
+            const answers = {
+                q1: 'a',
+                q2: 'b',
+                q3: 'b'
+            };
+
+            for (let i = 1; i <= 3; i++) {
+                const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                if (selected && selected.value === answers[`q${i}`]) {
+                    score++;
+                }
+            }
+
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `You scored ${score} out of 3!`;
+        });
+    </script>
+</body>
+</html>
